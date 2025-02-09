@@ -1,7 +1,8 @@
 clc; clear; close all;
 
 % Load Image
-img = imread('fruit.png'); 
+img = imread('fruit.png'); % Ensure correct image
+figure, imshow(img), title('Original Image');
 
 % Convert to HSV Color Space
 hsvImg = rgb2hsv(img);
@@ -20,14 +21,14 @@ bananaProps = regionprops(bananaMask, 'BoundingBox', 'Centroid', 'Area');
 orangeProps = regionprops(orangeMask, 'BoundingBox', 'Centroid', 'Area');
 
 % Display Image
-figure, imshow(img);
+figure, imshow(img), title('Correctly Labeled Image');
 hold on;
 
 % Label Banana
 if ~isempty(bananaProps)
     [~, idx] = max([bananaProps.Area]); % Select largest banana
     bananaCentroid = bananaProps(idx).Centroid;
-    text(bananaCentroid(1), bananaCentroid(2) + 15, 'Banana', ...
+    text(bananaCentroid(1), bananaCentroid(2) + 20, 'Banana', ...
         'Color', 'r', 'FontSize', 14, 'FontWeight', 'bold', 'HorizontalAlignment', 'center');
 end
 
@@ -35,8 +36,9 @@ end
 if ~isempty(orangeProps)
     [~, idx] = max([orangeProps.Area]); % Select largest orange
     orangeCentroid = orangeProps(idx).Centroid;
-    text(orangeCentroid(1), orangeCentroid(2) + 15, 'Orange', ...
+    text(orangeCentroid(1), orangeCentroid(2) + 20, 'Orange', ...
         'Color', 'r', 'FontSize', 14, 'FontWeight', 'bold', 'HorizontalAlignment', 'center');
 end
 
 hold off;
+
